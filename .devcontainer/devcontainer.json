@@ -1,0 +1,16 @@
+{
+  "name": "codex-seting cloud workspace",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-24-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "postCreateCommand": "npm install -g oh-my-codex && node --version && npm --version && git --version && omx --version",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.codespaces",
+        "ms-vscode.powershell"
+      ]
+    }
+  }
+}
