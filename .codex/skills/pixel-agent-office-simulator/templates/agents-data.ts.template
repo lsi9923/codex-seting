@@ -1,0 +1,84 @@
+// ============================================================
+// agents.ts 템플릿 — connect-ai 프로젝트 에이전트 정의
+// 사용법: 이 파일을 client/src/data/agents.ts 로 복사 후 수정
+// ============================================================
+
+export interface AgentDef {
+  id: string;
+  name: string;
+  role: string;
+  emoji: string;
+  color: string;
+  specialty: string;
+  tagline: string;
+  sprite: string;   // /manus-storage/... URL (manus-upload-file --webdev 결과)
+  persona?: string;
+  /** 기본 idle 방향 — 역할에 맞는 자연스러운 자세 */
+  idleDir: 'down' | 'left' | 'right' | 'up';
+}
+
+export interface DeskPos { x: number; y: number; }
+
+// 책상 위치 — 배경 이미지에 맞게 조정 필요 (% of stage)
+export const DESK_POSITIONS: Record<string, DeskPos> = {
+  youtube:   { x: 26, y: 32 },
+  instagram: { x: 40, y: 32 },
+  designer:  { x: 54, y: 32 },
+  business:  { x: 68, y: 32 },
+  developer: { x: 26, y: 56 },
+  secretary: { x: 68, y: 56 },
+  ceo:       { x: 47, y: 78 },
+};
+
+export const CEO_POS = { x: 47, y: 78 };
+
+export const AGENTS: AgentDef[] = [
+  {
+    id: 'ceo',
+    name: 'CEO',
+    role: 'Chief Executive',
+    emoji: '🧭',
+    color: '#F8FAFC',
+    specialty: '오케스트레이션, 작업 분해, 종합 판단',
+    tagline: '회사 전체 의사결정과 작업 분배를 맡습니다',
+    sprite: '/manus-storage/ceo_HASH.png',  // TODO: 실제 해시로 교체
+    idleDir: 'down',
+  },
+  // TODO: 나머지 에이전트 추가
+];
+
+// 역할별 idle 생각
+export const AGENT_THOUGHTS: Record<string, string[]> = {
+  ceo: ['이번 분기 목표가...', '회사 비전 정리해야', '다음 큰 그림은?'],
+  // TODO: 나머지 에이전트 추가
+};
+
+// 역할별 작업 중 메시지
+export const ROLE_WORK_MESSAGES: Record<string, string[]> = {
+  ceo: ['전략 수립 중...', '팀 조율 중...', '보고서 검토 중...'],
+  // TODO: 나머지 에이전트 추가
+};
+
+// LimeZu Premade_Character_48x48 스프라이트 설정
+export const SPRITE_CONFIG = {
+  TILE: 48,
+  CHAR_HEIGHT: 96,
+  FRAMES_PER_DIR: 6,
+  IDLE_ROW: 1,
+  WALK_ROW: 2,
+  DIRS: { down: 0, left: 6, right: 12, up: 18 } as const,
+  IDLE_SPEED: 16,   // 느린 호흡 (숫자 클수록 느림)
+  WALK_SPEED: 6,    // 빠른 걸음
+  SCALE: 2.0,       // 96×192px rendered — crisp and prominent
+};
+
+// Idle 방향 사이클 — 주기적으로 방향을 바꿔 생동감 부여
+export const IDLE_DIR_CYCLE: Record<string, Array<'down'|'left'|'right'|'up'>> = {
+  ceo:       ['down', 'right', 'down', 'left', 'down'],
+  youtube:   ['right', 'down', 'right', 'up', 'right'],
+  instagram: ['down', 'left', 'down', 'right', 'down'],
+  designer:  ['left', 'down', 'left', 'up', 'left'],
+  developer: ['right', 'down', 'right', 'down', 'right'],
+  business:  ['down', 'right', 'down', 'left', 'down'],
+  secretary: ['left', 'down', 'right', 'down', 'left'],
+};

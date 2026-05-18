@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sonol.local/schemas/run.schema.json",
+  "title": "RunRecord",
+  "type": "object",
+  "required": [
+    "run_id",
+    "plan_id",
+    "workspace_id",
+    "workspace_root",
+    "plan_snapshot_version",
+    "plan_snapshot",
+    "source_plan_updated_at",
+    "source_approval_status",
+    "mode",
+    "resolved_mode",
+    "adapter_type",
+    "adapter_backend",
+    "status",
+    "started_at",
+    "ended_at",
+    "retry_of",
+    "cancel_reason",
+    "active_agent_ids"
+  ],
+  "properties": {
+    "run_id": { "type": "string", "minLength": 1 },
+    "plan_id": { "type": "string", "minLength": 1 },
+    "workspace_id": { "type": ["string", "null"], "minLength": 1 },
+    "workspace_root": { "type": ["string", "null"], "minLength": 1 },
+    "plan_snapshot_version": { "type": "integer", "minimum": 1 },
+    "plan_snapshot": { "type": ["object", "null"] },
+    "source_plan_updated_at": { "type": "string", "minLength": 1 },
+    "source_approval_status": { "type": "string", "enum": ["draft", "ready", "approved"] },
+    "mode": { "type": "string", "enum": ["dry-run", "mock", "live"] },
+    "resolved_mode": { "type": "string", "enum": ["dry-run", "mock", "live"] },
+    "adapter_type": { "type": "string", "minLength": 1 },
+    "adapter_backend": { "type": "string", "minLength": 1 },
+    "provider_refs": {
+      "type": ["object", "null"],
+      "properties": {
+        "provider_run_id": { "type": ["string", "null"] },
+        "conversation_id": { "type": ["string", "null"] },
+        "thread_id": { "type": ["string", "null"] },
+        "session_id": { "type": ["string", "null"] },
+        "main_provider_session_kind": { "type": ["string", "null"] },
+        "main_provider_session_id": { "type": ["string", "null"] },
+        "main_provider_session_thread_id": { "type": ["string", "null"] },
+        "main_provider_session_file": { "type": ["string", "null"] },
+        "launch_truth_source": { "type": ["string", "null"], "enum": ["none", "manifest_only", "provider_native", null] },
+        "status_truth_source": { "type": ["string", "null"], "enum": ["none", "local_projection", "provider_native", null] },
+        "launch_surface": { "type": ["string", "null"] },
+        "dispatch_mode": { "type": ["string", "null"] },
+        "status_transport": { "type": ["string", "null"] },
+        "remote_status_supported": { "type": ["boolean", "null"] },
+        "remote_cancel_supported": { "type": ["boolean", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "runtime_bindings": {
+      "type": ["object", "null"],
+      "properties": {
+        "binding_id": { "type": ["string", "null"] },
+        "workspace_id": { "type": ["string", "null"] },
+        "db_path": { "type": ["string", "null"] },
+        "runtime_root": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "status": {
+      "type": "string",
+      "enum": ["queued", "prepared", "running", "blocked", "completed", "failed", "cancelled", "stale"]
+    },
+    "started_at": { "type": ["string", "null"] },
+    "ended_at": { "type": ["string", "null"] },
+    "retry_of": { "type": ["string", "null"] },
+    "cancel_reason": { "type": ["string", "null"] },
+    "active_agent_ids": { "type": "array", "items": { "type": "string" } },
+    "created_at": { "type": "string", "minLength": 1 },
+    "updated_at": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": false
+}

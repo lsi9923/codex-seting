@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sonol.local/schemas/plan.schema.json",
+  "title": "PlanRecord",
+  "type": "object",
+  "required": [
+    "plan_id",
+    "workspace_id",
+    "workspace_root",
+    "request_summary",
+    "preferred_language",
+    "single_or_multi",
+    "multi_agent_beneficial",
+    "recommendation_summary",
+    "operator_message",
+    "dashboard_url",
+    "authoritative_db_path",
+    "agents",
+    "tasks",
+    "dependency_edges",
+    "approval_status",
+    "dashboard_approval_status",
+    "terminal_confirmation_status",
+    "terminal_confirmation_required",
+    "latest_editor",
+    "context_version",
+    "effective_max_threads",
+    "effective_max_depth"
+  ],
+  "properties": {
+    "plan_id": { "type": "string", "minLength": 1 },
+    "plan_title": { "type": "string", "minLength": 1 },
+    "workspace_id": { "type": "string", "minLength": 1 },
+    "workspace_root": { "type": "string", "minLength": 1 },
+    "request_summary": { "type": "string", "minLength": 1 },
+    "preferred_language": {
+      "type": "string",
+      "enum": ["ko", "en"]
+    },
+    "single_or_multi": { "type": "string", "enum": ["single", "multi"] },
+    "multi_agent_beneficial": { "type": "boolean" },
+    "recommendation_summary": { "type": "string", "minLength": 1 },
+    "operator_message": { "type": "string", "minLength": 1 },
+    "dashboard_url": { "type": "string", "minLength": 1 },
+    "authoritative_db_path": { "type": "string", "minLength": 1 },
+    "agents": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 6,
+      "items": { "$ref": "./agent-definition.schema.json" }
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["task_id", "title", "order"],
+        "properties": {
+          "task_id": { "type": "string", "minLength": 1 },
+          "title": { "type": "string", "minLength": 1 },
+          "order": { "type": "integer", "minimum": 1 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "dependency_edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to"],
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "approval_status": { "type": "string", "enum": ["draft", "ready", "approved"] },
+    "dashboard_approval_status": { "type": "string", "enum": ["pending", "approved", "not_needed"] },
+    "terminal_confirmation_status": { "type": "string", "enum": ["not_requested", "pending", "confirmed", "not_required"] },
+    "terminal_confirmation_required": { "type": "boolean" },
+    "latest_editor": { "type": "string", "minLength": 1 },
+    "recommendation_reasons": { "type": "array", "items": { "type": "string" } },
+    "planning_mode": {
+      "type": "string",
+      "enum": ["autonomous_draft", "heuristic", "remote_normalized_local_creative_draft"]
+    },
+    "planning_backend": { "type": "string", "minLength": 1 },
+    "planning_driver": { "type": "string", "minLength": 1 },
+    "planner_selection_source": { "type": "string", "minLength": 1 },
+    "remote_config_detected": { "type": "boolean" },
+    "remote_config_complete": { "type": "boolean" },
+    "remote_config_conflict_reason": { "type": ["string", "null"], "minLength": 1 },
+    "planning_model": { "type": "string", "minLength": 1 },
+    "created_at": { "type": "string", "minLength": 1 },
+    "updated_at": { "type": "string", "minLength": 1 },
+    "context_version": { "type": "integer", "minimum": 1 },
+    "effective_max_threads": { "type": "integer", "minimum": 1, "maximum": 6 },
+    "effective_max_depth": { "type": "integer", "minimum": 1, "maximum": 1 }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,81 @@
+{
+  "plan_title": "브라우저 미니게임 제작",
+  "preferred_language": "ko",
+  "single_or_multi": "multi",
+  "multi_agent_beneficial": true,
+  "recommendation_summary": "조사, 구현, 검증이 분리되어 멀티 에이전트 구성이 적합합니다.",
+  "recommendation_reasons": [
+    "게임 종류 조사와 실제 구현의 책임이 분리됩니다.",
+    "검증 트랙이 구현 결과를 독립적으로 점검할 수 있습니다."
+  ],
+  "subagents": [
+    {
+      "slot_id": "game-research",
+      "role_label": "GameResearcher",
+      "execution_class": "research",
+      "purpose": "구현할 미니게임 후보를 조사하고 최종 게임 규칙을 정리합니다.",
+      "task_title": "게임 조사 및 규칙 확정",
+      "selection_rationale": "구현 전에 게임 유형과 핵심 규칙을 확정해야 합니다.",
+      "provider_agent_type": "explorer",
+      "developer_instructions": "후보 게임을 비교하고 최종 선정안과 핵심 규칙을 .sonol/game-spec.md에 정리하세요.",
+      "model": "gpt-5.4-mini",
+      "model_reasoning_effort": "medium",
+      "sandbox_mode": "read-only",
+      "mcp_servers": [],
+      "skills_config": [
+        "sonol-agent-runtime"
+      ],
+      "nickname_candidates": [
+        "리서처",
+        "게임기획"
+      ],
+      "read_paths": [
+        "/abs/workspace"
+      ],
+      "write_paths": [
+        "/abs/workspace/.sonol"
+      ],
+      "deny_paths": [],
+      "operational_constraints": [
+        "최종 후보는 단일 HTML 파일로 구현 가능해야 합니다.",
+        "모바일과 데스크톱에서 모두 조작 가능해야 합니다."
+      ],
+      "depends_on": []
+    },
+    {
+      "slot_id": "game-implement",
+      "role_label": "GameImplementer",
+      "execution_class": "implementer",
+      "purpose": "정의된 규칙을 기준으로 게임을 구현합니다.",
+      "task_title": "게임 구현",
+      "selection_rationale": "조사 결과를 코드로 옮기는 전담 구현 트랙이 필요합니다.",
+      "provider_agent_type": "worker",
+      "developer_instructions": ".sonol/game-spec.md를 기준으로 index.html을 구현하세요.",
+      "model": "gpt-5.4",
+      "model_reasoning_effort": "medium",
+      "sandbox_mode": "workspace-write",
+      "mcp_servers": [],
+      "skills_config": [
+        "sonol-agent-runtime"
+      ],
+      "nickname_candidates": [
+        "구현자",
+        "게임개발"
+      ],
+      "read_paths": [
+        "/abs/workspace"
+      ],
+      "write_paths": [
+        "/abs/workspace"
+      ],
+      "deny_paths": [],
+      "operational_constraints": [
+        "외부 CDN 없이 순수 HTML/CSS/JS만 사용합니다.",
+        "점수판, 재시작, 게임오버 상태를 포함합니다."
+      ],
+      "depends_on": [
+        "game-research"
+      ]
+    }
+  ]
+}

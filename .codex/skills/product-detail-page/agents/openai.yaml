@@ -1,0 +1,4 @@
+interface:
+  display_name: "상품 상세페이지 제작"
+  short_description: "상품 상세페이지 카피와 이미지 프롬프트 제작 지원"
+  default_prompt: "$product-detail-page 로 상품 상세페이지 카피, 한글 이미지 프롬프트, 최종 합본 이미지를 만들어줘."

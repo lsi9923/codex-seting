@@ -1,0 +1,4 @@
+interface:
+  display_name: "HWPX"
+  short_description: "Create, inspect, and edit HWPX documents"
+  default_prompt: "Use $hwpx to create, inspect, or edit a Hancom HWPX document."

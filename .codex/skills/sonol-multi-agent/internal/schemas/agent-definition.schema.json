@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sonol.local/schemas/agent-definition.schema.json",
+  "title": "AgentDefinition",
+  "type": "object",
+  "required": [
+    "agent_id",
+    "role",
+    "preferred_language",
+    "purpose",
+    "provider_agent_type",
+    "custom_agent_name",
+    "custom_config_file",
+    "developer_instructions",
+    "model",
+    "model_reasoning_effort",
+    "sandbox_mode",
+    "mcp_servers",
+    "skills_config",
+    "nickname_candidates",
+    "approval_mode",
+    "communication_mode",
+    "read_paths",
+    "write_paths",
+    "deny_paths",
+    "operational_constraints",
+    "depends_on",
+    "reporting_contract",
+    "execution_mode"
+  ],
+  "properties": {
+    "agent_id": { "type": "string", "minLength": 1 },
+    "role": { "type": "string", "minLength": 1 },
+    "role_label": { "type": "string", "minLength": 1 },
+    "execution_class": {
+      "type": "string",
+      "enum": ["lead", "planner", "research", "implementer", "verifier", "reviewer", "docs", "refactor", "ops", "general"]
+    },
+    "workstream_id": { "type": "string", "minLength": 1 },
+    "selection_rationale": { "type": "string", "minLength": 1 },
+    "preferred_language": {
+      "type": "string",
+      "enum": ["ko", "en"]
+    },
+    "purpose": { "type": "string", "minLength": 1 },
+    "provider_agent_type": {
+      "type": "string",
+      "enum": ["default", "worker", "explorer", "custom"]
+    },
+    "codex_agent_type": {
+      "type": "string",
+      "enum": ["default", "worker", "explorer", "custom"]
+    },
+    "execution_target": {
+      "type": "object",
+      "required": ["provider", "backend"],
+      "properties": {
+        "provider": { "type": "string", "minLength": 1 },
+        "backend": { "type": "string", "minLength": 1 },
+        "profile": { "type": ["string", "null"] },
+        "capabilities": {
+          "type": ["array", "null"],
+          "items": { "type": "string", "minLength": 1 }
+        }
+      },
+      "additionalProperties": false
+    },
+    "custom_agent_name": { "type": ["string", "null"] },
+    "custom_config_file": { "type": ["string", "null"] },
+    "developer_instructions": { "type": "string", "minLength": 1 },
+    "model": { "type": "string", "minLength": 1 },
+    "model_reasoning_effort": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "xhigh"]
+    },
+    "sandbox_mode": {
+      "type": "string",
+      "enum": ["read-only", "workspace-write", "danger-full-access"]
+    },
+    "mcp_servers": { "type": "array", "items": { "type": "string" } },
+    "skills_config": { "type": "array", "items": { "type": "string" } },
+    "nickname_candidates": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "approval_mode": {
+      "type": "string",
+      "enum": ["inherit-session"]
+    },
+    "communication_mode": {
+      "type": "string",
+      "enum": ["delegated-thread-and-runtime-events"]
+    },
+    "read_paths": { "type": "array", "items": { "type": "string" } },
+    "write_paths": { "type": "array", "items": { "type": "string" } },
+    "deny_paths": { "type": "array", "items": { "type": "string" } },
+    "assigned_task_ids": {
+      "type": "array",
+      "maxItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "current_task_id": { "type": ["string", "null"] },
+    "operational_constraints": { "type": "array", "items": { "type": "string" } },
+    "depends_on": { "type": "array", "items": { "type": "string" } },
+    "reporting_contract": {
+      "type": "string",
+      "enum": ["sonol-agent-runtime@1.0.0", "sonol-runtime-reporting@1.0.0"]
+    },
+    "execution_mode": { "type": "string", "enum": ["dry-run", "mock", "live", "auto"] }
+  },
+  "additionalProperties": false
+}

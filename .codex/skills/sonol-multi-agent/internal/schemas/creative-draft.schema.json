@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sonol.local/schemas/creative-draft.schema.json",
+  "title": "CreativeDraft",
+  "type": "object",
+  "required": [
+    "plan_title",
+    "preferred_language",
+    "single_or_multi",
+    "multi_agent_beneficial",
+    "recommendation_summary",
+    "recommendation_reasons",
+    "subagents"
+  ],
+  "properties": {
+    "plan_title": { "type": "string", "minLength": 1 },
+    "preferred_language": { "type": "string", "enum": ["ko", "en"] },
+    "single_or_multi": { "type": "string", "enum": ["single", "multi"] },
+    "multi_agent_beneficial": { "type": "boolean" },
+    "recommendation_summary": { "type": "string", "minLength": 1 },
+    "recommendation_reasons": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "subagents": {
+      "type": "array",
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": [
+          "slot_id",
+          "role_label",
+          "execution_class",
+          "purpose",
+          "task_title",
+          "selection_rationale",
+          "provider_agent_type",
+          "developer_instructions",
+          "model",
+          "model_reasoning_effort",
+          "sandbox_mode",
+          "mcp_servers",
+          "skills_config",
+          "nickname_candidates",
+          "read_paths",
+          "write_paths",
+          "deny_paths",
+          "operational_constraints",
+          "depends_on"
+        ],
+        "properties": {
+          "slot_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$"
+          },
+          "role_label": { "type": "string", "minLength": 1 },
+          "execution_class": {
+            "type": "string",
+            "enum": ["planner", "research", "implementer", "verifier", "reviewer", "docs", "refactor", "ops", "general"]
+          },
+          "purpose": { "type": "string", "minLength": 1 },
+          "task_title": { "type": "string", "minLength": 1 },
+          "selection_rationale": { "type": "string", "minLength": 1 },
+          "provider_agent_type": {
+            "type": "string",
+            "enum": ["default", "worker", "explorer", "custom"]
+          },
+          "codex_agent_type": {
+            "type": ["string", "null"],
+            "enum": ["default", "worker", "explorer", "custom", null]
+          },
+          "developer_instructions": { "type": "string", "minLength": 1 },
+          "model": { "type": "string", "minLength": 1 },
+          "model_reasoning_effort": {
+            "type": "string",
+            "enum": ["low", "medium", "high", "xhigh"]
+          },
+          "sandbox_mode": {
+            "type": "string",
+            "enum": ["read-only", "workspace-write", "danger-full-access"]
+          },
+          "mcp_servers": { "type": "array", "items": { "type": "string" } },
+          "skills_config": { "type": "array", "items": { "type": "string" } },
+          "nickname_candidates": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "read_paths": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "write_paths": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "deny_paths": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "operational_constraints": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "depends_on": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9_-]{1,63}$"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,169 @@
+# oh-my-codex top-level settings (must be before any [table])
+notify = ["node", "C:\\Users\\imda0\\AppData\\Local\\Programs\\nodejs\\node_modules\\oh-my-codex\\dist\\scripts\\notify-hook.js"]
+model_reasoning_effort = "xhigh"
+developer_instructions = "You have oh-my-codex installed. AGENTS.md is the orchestration brain and main control surface. Follow AGENTS.md for skill/keyword routing, $name workflow invocation, and role-specialized subagents. Use outcome-first, concise progress updates: state the target result, constraints, validation evidence, and stop condition before adding process detail. Native subagents live in .codex/agents and may handle independent parallel subtasks within one Codex session or team pane. Skills load from .codex/skills, not native-agent TOMLs. Treat installed prompts as narrower execution surfaces under AGENTS.md authority."
+
+# oh-my-codex seeded behavioral defaults (uninstall removes unchanged defaults)
+model_context_window = 250000
+model_auto_compact_token_limit = 200000
+# End oh-my-codex seeded behavioral defaults
+
+model = "gpt-5.5"
+personality = "pragmatic"
+[projects.'\\?\C:\dev\myproj']
+trust_level = "trusted"
+
+[projects.'\\?\C:\Users\imda0\Desktop\Python Project']
+trust_level = "trusted"
+
+[projects.'\\?\C:\Users\imda0\Desktop\커서 ai 폴더']
+trust_level = "trusted"
+
+[projects.'c:\users\imda0\desktop\커서 ai 폴더\옵시디언 뇌']
+trust_level = "trusted"
+
+[windows]
+sandbox = "elevated"
+
+[mcp_servers.playwright]
+command = "npx"
+args = ["@playwright/mcp@latest"]
+startup_timeout_sec = 15.0
+
+[mcp_servers.notion]
+url = "https://mcp.notion.com/mcp"
+
+[mcp_servers.figma]
+url = "https://mcp.figma.com/mcp"
+
+[mcp_servers.lazyweb]
+command = "powershell.exe"
+args = ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", '''$ErrorActionPreference = 'Stop'; $TOKEN = $env:LAZYWEB_MCP_TOKEN; if ([string]::IsNullOrWhiteSpace($TOKEN) -and (Test-Path (Join-Path $HOME '.lazyweb\lazyweb_mcp_token'))) { $TOKEN = (Get-Content -LiteralPath (Join-Path $HOME '.lazyweb\lazyweb_mcp_token') -Raw).Trim() }; if ([string]::IsNullOrWhiteSpace($TOKEN) -and (Test-Path (Join-Path $HOME '.codex\lazyweb_mcp_token'))) { $TOKEN = (Get-Content -LiteralPath (Join-Path $HOME '.codex\lazyweb_mcp_token') -Raw).Trim() }; & npx -y mcp-remote https://www.lazyweb.com/mcp --header "Authorization: Bearer $TOKEN" --transport http-first --silent''']
+startup_timeout_sec = 30.0
+
+[mcp_servers.chrome-devtools]
+command = "npx"
+args = ["-y", "chrome-devtools-mcp@latest"]
+
+[features]
+remote_connections = true
+multi_agent = true
+image_generation = true
+memories = true
+goals = true
+
+child_agents_md = true
+hooks = true
+
+[marketplaces.openai-bundled]
+last_updated = "2026-05-18T06:09:12Z"
+source_type = "local"
+source = '\\?\C:\Users\imda0\.codex\.tmp\bundled-marketplaces\openai-bundled'
+
+[marketplaces.openai-primary-runtime]
+last_updated = "2026-05-16T06:18:16Z"
+source_type = "local"
+source = '\\?\C:\Users\imda0\.cache\codex-runtimes\codex-primary-runtime\plugins\openai-primary-runtime'
+[agents.korean-commerce-desktop-manager]
+description = "Workspace-specific Windows desktop commerce manager agent for PySide6, Coupang/Naver APIs, packaging, and SellerPick-like operator workflows."
+config_file = "C:/Users/imda0/Desktop/커서 ai 폴더/.codex/agents/korean-commerce-desktop-manager.toml"
+
+[agents.python-pro]
+description = "Python implementation and debugging specialist."
+config_file = "agents/python-pro.toml"
+
+[agents.ui-fixer]
+description = "UI layout and rendering fixer."
+config_file = "agents/ui-fixer.toml"
+
+[agents.browser-debugger]
+description = "Browser-based reproduction and debugging specialist."
+config_file = "agents/browser-debugger.toml"
+
+[agents.reviewer]
+description = "Code review and risk finding specialist."
+config_file = "agents/reviewer.toml"
+
+[agents.powershell-7-expert]
+description = "Windows PowerShell 7 automation specialist."
+config_file = "agents/powershell-7-expert.toml"
+
+[marketplaces.lazyweb]
+last_updated = "2026-05-11T06:10:20Z"
+last_revision = "d78ee95c3c8d141c155360cc19f2ab39625d3e43"
+source_type = "git"
+source = "https://github.com/aboul3ata/lazyweb-skill.git"
+
+[plugins."browser-use@openai-bundled"]
+enabled = true
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[plugins."github@openai-curated"]
+enabled = true
+
+[plugins."lazyweb@lazyweb"]
+enabled = true
+
+[plugins."game-studio@openai-curated"]
+enabled = true
+
+[plugins."cloudflare@openai-curated"]
+enabled = true
+
+[plugins."superpowers@openai-curated"]
+enabled = true
+
+[plugins."hyperframes@openai-curated"]
+enabled = true
+
+[shell_environment_policy.set]
+USE_OMX_EXPLORE_CMD = "1"
+
+[agents]
+max_threads = 6
+max_depth = 2
+
+# ============================================================
+# oh-my-codex (OMX) Configuration
+# Managed by omx setup - manual edits preserved on next setup
+# ============================================================
+
+# OMX-owned Codex hook trust state
+# Trusts only setup-managed codex-native-hook.js wrappers.
+[hooks.state."C:\\Users\\imda0\\.codex\\hooks.json:post_compact:0:0"]
+trusted_hash = "sha256:56c388ad4e7c7dfe346bfe4cac950d199ca56456c5969982ade9bfef56f3907c"
+
+[hooks.state."C:\\Users\\imda0\\.codex\\hooks.json:post_tool_use:0:0"]
+trusted_hash = "sha256:ae1b66334e6066c956cc3744dca09198286f117925de47a095b117cdc2458ee7"
+
+[hooks.state."C:\\Users\\imda0\\.codex\\hooks.json:pre_compact:0:0"]
+trusted_hash = "sha256:a72d92bf28161534840e22471cc3839cafb0f16c915ac6cfd4a698089b28de8a"
+
+[hooks.state."C:\\Users\\imda0\\.codex\\hooks.json:pre_tool_use:0:0"]
+trusted_hash = "sha256:65951e1e6fd700749ca39209dea8ac4b0da2862fa9c70a4ebb82d191b9428601"
+
+[hooks.state."C:\\Users\\imda0\\.codex\\hooks.json:session_start:0:0"]
+trusted_hash = "sha256:1cb2f863e929ba864d62f35c1a26f65ccdeff7b978ffe12ac0db96b4d5d79e99"
+
+[hooks.state."C:\\Users\\imda0\\.codex\\hooks.json:stop:0:0"]
+trusted_hash = "sha256:304392a5c3e94eacbbbb2e87948be06fa7338495c5220cf2e18f353b23e9120b"
+
+[hooks.state."C:\\Users\\imda0\\.codex\\hooks.json:user_prompt_submit:0:0"]
+trusted_hash = "sha256:1dea5496888ceb05441ebdfcb89ffad3efc394c720b23b63dfc908b8fad51851"
+# End OMX-owned Codex hook trust state
+
+# OMX TUI StatusLine (Codex CLI v0.101.0+)
+[tui]
+# omx:managed-status-line
+status_line = ["model-with-reasoning", "git-branch", "context-remaining", "total-input-tokens", "total-output-tokens", "five-hour-limit", "weekly-limit"]
+
+# ============================================================
+# End oh-my-codex

@@ -1,0 +1,30 @@
+# Never commit local auth or live runtime state.
+.codex/auth.json
+.codex/cap_sid
+.codex/installation_id
+.codex/.sandbox-secrets/
+.codex/sessions/
+.codex/archived_sessions/
+.codex/log/
+.codex/logs/
+.codex/browser/
+.codex/generated_images/
+.codex/cache/
+.codex/tmp/
+.codex/.tmp/
+.codex/.sandbox/
+.codex/.sandbox-bin/
+.codex/models_cache.json
+.codex/session_index.jsonl
+.codex/.codex-global-state.json
+.codex/.codex-global-state.json.bak
+.codex/sandbox.log
+.codex/sandbox_commands.rust.log
+.codex/*.sqlite
+.codex/*.sqlite-*
+.codex/*.sqlite.*
+
+# Local editor/system files.
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sonol.local/schemas/artifact-event.schema.json",
+  "title": "ArtifactEvent",
+  "type": "object",
+  "required": [
+    "event_id",
+    "plan_id",
+    "run_id",
+    "agent_id",
+    "task_id",
+    "artifact_type",
+    "artifact_ref",
+    "summary",
+    "validation_status",
+    "timestamp",
+    "schema_version"
+  ],
+  "properties": {
+    "event_id": { "type": "string", "minLength": 1 },
+    "plan_id": { "type": "string", "minLength": 1 },
+    "run_id": { "type": "string", "minLength": 1 },
+    "agent_id": { "type": "string", "minLength": 1 },
+    "task_id": { "type": "string", "minLength": 1 },
+    "artifact_type": { "type": "string", "minLength": 1 },
+    "artifact_ref": { "type": "string", "minLength": 1 },
+    "summary": { "type": "string" },
+    "detail": { "type": "string" },
+    "validation_status": { "type": "string", "enum": ["valid", "invalid", "unchecked"] },
+    "timestamp": { "type": "string", "minLength": 1 },
+    "schema_version": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": false
+}

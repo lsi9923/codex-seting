@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sonol.local/schemas/session-updated.schema.json",
+  "title": "SessionUpdated",
+  "type": "object",
+  "required": [
+    "event_id",
+    "plan_id",
+    "run_id",
+    "status",
+    "message",
+    "timestamp",
+    "schema_version"
+  ],
+  "properties": {
+    "event_id": { "type": "string", "minLength": 1 },
+    "plan_id": { "type": "string", "minLength": 1 },
+    "run_id": { "type": "string", "minLength": 1 },
+    "agent_id": { "type": "string", "minLength": 1 },
+    "task_id": { "type": "string", "minLength": 1 },
+    "status": {
+      "type": "string",
+      "enum": ["queued", "prepared", "running", "blocked", "idle", "completed", "failed", "cancelled", "stale"]
+    },
+    "message": { "type": "string" },
+    "detail": { "type": "string" },
+    "blocked_reason": { "type": "string" },
+    "timestamp": { "type": "string", "minLength": 1 },
+    "schema_version": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": false
+}

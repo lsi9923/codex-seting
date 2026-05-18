@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sonol.local/schemas/completion-event.schema.json",
+  "title": "CompletionEvent",
+  "type": "object",
+  "required": [
+    "event_id",
+    "plan_id",
+    "run_id",
+    "agent_id",
+    "task_id",
+    "result",
+    "summary",
+    "blockers",
+    "next_actions",
+    "timestamp",
+    "schema_version"
+  ],
+  "properties": {
+    "event_id": { "type": "string", "minLength": 1 },
+    "plan_id": { "type": "string", "minLength": 1 },
+    "run_id": { "type": "string", "minLength": 1 },
+    "agent_id": { "type": "string", "minLength": 1 },
+    "task_id": { "type": "string", "minLength": 1 },
+    "result": { "type": "string", "enum": ["success", "failure"] },
+    "summary": { "type": "string" },
+    "detail": { "type": "string" },
+    "blockers": { "type": "array", "items": { "type": "string" } },
+    "next_actions": { "type": "array", "items": { "type": "string" } },
+    "timestamp": { "type": "string", "minLength": 1 },
+    "schema_version": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": false
+}

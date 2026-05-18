@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sonol.local/schemas/plan-updated.schema.json",
+  "title": "PlanUpdated",
+  "type": "object",
+  "required": [
+    "event_id",
+    "plan_id",
+    "approval_status",
+    "message",
+    "timestamp",
+    "schema_version"
+  ],
+  "properties": {
+    "event_id": { "type": "string", "minLength": 1 },
+    "plan_id": { "type": "string", "minLength": 1 },
+    "approval_status": { "type": "string", "enum": ["draft", "ready", "approved"] },
+    "message": { "type": "string" },
+    "timestamp": { "type": "string", "minLength": 1 },
+    "schema_version": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": false
+}

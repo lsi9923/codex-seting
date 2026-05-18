@@ -1,0 +1,1 @@
+prefix_rule(pattern=["C:\\Program Files\\PowerShell\\7\\pwsh.exe", "-Command", "py -3.11 -m py_compile '.\\daangn_live_finder.py' '.\\daangn_best_app.py' '.\\daangn_best_core.py'"], decision="allow")

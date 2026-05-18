@@ -1,0 +1,81 @@
+{
+  "plan_title": "Browser Mini Game Build",
+  "preferred_language": "en",
+  "single_or_multi": "multi",
+  "multi_agent_beneficial": true,
+  "recommendation_summary": "Research, implementation, and verification are separate enough to benefit from multi-agent orchestration.",
+  "recommendation_reasons": [
+    "Game selection and coding are distinct workstreams.",
+    "A verifier can review gameplay and edge cases independently."
+  ],
+  "subagents": [
+    {
+      "slot_id": "game-research",
+      "role_label": "GameResearcher",
+      "execution_class": "research",
+      "purpose": "Evaluate candidate mini games and define the chosen game rules.",
+      "task_title": "Game research and rule definition",
+      "selection_rationale": "The implementation should start from a settled game concept and rule set.",
+      "provider_agent_type": "explorer",
+      "developer_instructions": "Compare candidate games and write the chosen concept with core rules into .sonol/game-spec.md.",
+      "model": "gpt-5.4-mini",
+      "model_reasoning_effort": "medium",
+      "sandbox_mode": "read-only",
+      "mcp_servers": [],
+      "skills_config": [
+        "sonol-agent-runtime"
+      ],
+      "nickname_candidates": [
+        "Researcher",
+        "GameDesign"
+      ],
+      "read_paths": [
+        "/abs/workspace"
+      ],
+      "write_paths": [
+        "/abs/workspace/.sonol"
+      ],
+      "deny_paths": [],
+      "operational_constraints": [
+        "The final game must be implementable in a single HTML file.",
+        "The controls must work on both desktop and mobile."
+      ],
+      "depends_on": []
+    },
+    {
+      "slot_id": "game-implement",
+      "role_label": "GameImplementer",
+      "execution_class": "implementer",
+      "purpose": "Implement the game from the defined rules.",
+      "task_title": "Game implementation",
+      "selection_rationale": "A dedicated implementation track is needed to turn the selected concept into code.",
+      "provider_agent_type": "worker",
+      "developer_instructions": "Read .sonol/game-spec.md and implement the game in index.html.",
+      "model": "gpt-5.4",
+      "model_reasoning_effort": "medium",
+      "sandbox_mode": "workspace-write",
+      "mcp_servers": [],
+      "skills_config": [
+        "sonol-agent-runtime"
+      ],
+      "nickname_candidates": [
+        "Implementer",
+        "GameBuild"
+      ],
+      "read_paths": [
+        "/abs/workspace"
+      ],
+      "write_paths": [
+        "/abs/workspace"
+      ],
+      "deny_paths": [],
+      "operational_constraints": [
+        "Use only plain HTML, CSS, and JavaScript without external CDNs.",
+        "Include score, restart, and game-over states."
+      ],
+      "depends_on": [
+        "game-research"
+      ]
+    }
+  ]
+}

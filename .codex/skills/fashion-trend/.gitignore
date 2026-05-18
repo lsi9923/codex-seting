@@ -1,0 +1,27 @@
+# 크롤링 산출물 (저작권/재배포 이슈로 절대 커밋 금지)
+artifacts/
+trend-report/
+*.html
+
+# 시스템 파일
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# 에디터
+.vscode/
+.idea/
+*.swp
+*~
+
+# 로그/임시
+*.log
+tmp/
+.cache/
